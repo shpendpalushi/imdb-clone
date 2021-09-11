@@ -10,6 +10,7 @@ namespace IMDBClone.Domain.Mapper
         public ApplicationMapper()
         {
             //Straight way
+            CreateMap<BaseEntity, BaseDTO>();
             CreateMap<Actor, ActorDTO>()
                 .IncludeBase<BaseEntity, BaseDTO>();
             CreateMap<Movie, MovieDTO>()
@@ -19,7 +20,7 @@ namespace IMDBClone.Domain.Mapper
             CreateMap<ApplicationUser, ApplicationUserDTO>();
 
             //Reverse way
-            
+            CreateMap<BaseDTO, BaseEntity>();
             CreateMap<ActorDTO ,Actor>()
                 .IncludeBase<BaseDTO, BaseEntity>();
             CreateMap<MovieDTO, Movie>()

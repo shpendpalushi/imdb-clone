@@ -1,0 +1,15 @@
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/bin/Debug/net5.0/IMDBClone.Data.deps.json
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/bin/Debug/net5.0/IMDBClone.Data.runtimeconfig.json
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/bin/Debug/net5.0/IMDBClone.Data.runtimeconfig.dev.json
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/bin/Debug/net5.0/IMDBClone.Data.dll
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/bin/Debug/net5.0/ref/IMDBClone.Data.dll
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/bin/Debug/net5.0/IMDBClone.Data.pdb
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/IMDBClone.Data.csproj.AssemblyReference.cache
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/IMDBClone.Data.GeneratedMSBuildEditorConfig.editorconfig
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/IMDBClone.Data.AssemblyInfoInputs.cache
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/IMDBClone.Data.AssemblyInfo.cs
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/IMDBClone.Data.csproj.CoreCompileInputs.cache
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/IMDBClone.Data.dll
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/ref/IMDBClone.Data.dll
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/IMDBClone.Data.pdb
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Data/obj/Debug/net5.0/IMDBClone.Data.genruntimeconfig.cache

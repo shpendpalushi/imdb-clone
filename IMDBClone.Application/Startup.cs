@@ -1,3 +1,5 @@
+using IMDBClone.Domain.Extensions;
+using IMDBClone.Domain.Extensions.ServiceExtensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,11 +17,17 @@ namespace IMDBClone.Application
         {
             _configuration = configuration;
         }
-        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddExtendedDatabaseContextService(_configuration.GetConnectionString("WebApiConnection"));
+            services.AddAdditionalExtensions();
+            services.AddAutoMapperConfig();
+            services.AddExtendedAuthenticationService(_configuration);
+            services.AddPasswordPolicy();
+            services.AddExtendedAuthorization();
+            services.AddDataAccessServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -37,13 +45,18 @@ namespace IMDBClone.Application
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IMDBClone.Application v1"));
             }
 
+            app.ConfigureExceptionHandler(env);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

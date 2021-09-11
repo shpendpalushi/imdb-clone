@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using IMDBClone.Data.Entities;
+using IMDBClone.Data.Seed;
 using IMDBClone.Domain.Definitions;
 using IMDBClone.Domain.DTO.User;
 using IMDBClone.Domain.Extensions.Types;
@@ -29,8 +30,14 @@ namespace IMDBClone.Domain.Service.Implementations
             var user = _mapper.Map<RegisterDTO, ApplicationUser>(model);
             var registerResult = await _userManager.CreateAsync(user, model.Password);
             if (!registerResult.Succeeded) return Result.Fail<UserDTO>(registerResult.Errors.ToEnumerableString());
+            var addToRole = await _userManager.AddToRoleAsync(user, RoleDefaults.User);
+            if (!addToRole.Succeeded)
+            {
+                await _userManager.DeleteAsync(user);
+                return Result.Fail<UserDTO>(addToRole.Errors.ToEnumerableString());
+            }
             var token = await _tokenService.CreateToken(user);
-            var userDto = new UserDTO()
+            UserDTO userDto = new ()
             {
                 UserName = model.Email,
                 Token = token

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Orkx1apcC6NVKxbl2vTFK4QqOMySoq2QjHlS5b6FaAzTlZPnhYSewcYnvEngggPIZIkpVUzojsi+stbfqLQaVg==",
+  "dgSpecHash": "5fKO4YQCJMfOzzZ9gUDFO8SuQd5vCiDfbAVQ7eZsuNVBXcsRaEP8ZSbKOXPUPzVGvZ9MTrujrXGbGn/I2NstzA==",
   "success": true,
   "projectFilePath": "/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Application/IMDBClone.Application.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "/home/shpendpalushi/.nuget/packages/fluentvalidation/10.3.3/fluentvalidation.10.3.3.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/fluentvalidation.aspnetcore/10.3.3/fluentvalidation.aspnetcore.10.3.3.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/fluentvalidation.dependencyinjectionextensions/10.3.3/fluentvalidation.dependencyinjectionextensions.10.3.3.nupkg.sha512",
+    "/home/shpendpalushi/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/5.0.9/microsoft.aspnetcore.authentication.jwtbearer.5.0.9.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/microsoft.aspnetcore.cryptography.internal/5.0.9/microsoft.aspnetcore.cryptography.internal.5.0.9.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/5.0.9/microsoft.aspnetcore.cryptography.keyderivation.5.0.9.nupkg.sha512",
@@ -17,6 +18,7 @@
     "/home/shpendpalushi/.nuget/packages/microsoft.entityframeworkcore/5.0.9/microsoft.entityframeworkcore.5.0.9.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/microsoft.entityframeworkcore.abstractions/5.0.9/microsoft.entityframeworkcore.abstractions.5.0.9.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/microsoft.entityframeworkcore.analyzers/5.0.9/microsoft.entityframeworkcore.analyzers.5.0.9.nupkg.sha512",
+    "/home/shpendpalushi/.nuget/packages/microsoft.entityframeworkcore.design/5.0.9/microsoft.entityframeworkcore.design.5.0.9.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/microsoft.entityframeworkcore.relational/5.0.9/microsoft.entityframeworkcore.relational.5.0.9.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/home/shpendpalushi/.nuget/packages/microsoft.extensions.caching.abstractions/5.0.0/microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",

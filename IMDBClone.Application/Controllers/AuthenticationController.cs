@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using IMDBClone.Application.Controllers.Base;
 using IMDBClone.Domain.DTO.User;
 using IMDBClone.Domain.Extensions.Types;
 using IMDBClone.Domain.Service.Contracts;
@@ -18,7 +19,7 @@ namespace IMDBClone.Application.Controllers
         [HttpPost("api/registration")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDto)
         {
-            var validator = new RegisterValidator();
+            var validator = new RegisterValidator(_userService);
             var validationResult = await validator.ValidateAsync(registerDto);
             if (!validationResult.IsValid) return BadRequest(validationResult.Errors.ToListString());
             

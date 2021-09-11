@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Extensions\ServiceExtensions" />
       <Folder Include="Tokens" />
     </ItemGroup>
 
