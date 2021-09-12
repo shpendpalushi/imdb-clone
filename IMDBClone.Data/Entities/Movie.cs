@@ -15,6 +15,7 @@ namespace IMDBClone.Data.Entities
         public string FileName { get; set; }
         public virtual ICollection<MovieActor> Cast { get; set; }
         public MovieTypeEnum MovieType { get; set; }
+        public virtual ICollection<Rating> Ratings{ get; set; }
         
     }
 }

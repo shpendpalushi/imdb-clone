@@ -18,6 +18,8 @@ namespace IMDBClone.Domain.Mapper
             CreateMap<MovieActor, MovieActorDTO>()
                 .IncludeBase<BaseEntity, BaseDTO>();
             CreateMap<ApplicationUser, ApplicationUserDTO>();
+            CreateMap<Rating, RatingDTO>()
+                .IncludeBase<BaseEntity, BaseDTO>();
 
             //Reverse way
             CreateMap<BaseDTO, BaseEntity>();
@@ -28,6 +30,8 @@ namespace IMDBClone.Domain.Mapper
             CreateMap<MovieActorDTO, MovieActor>()
                 .IncludeBase<BaseDTO, BaseEntity>();
             CreateMap<ApplicationUserDTO, ApplicationUser>();
+            CreateMap<RatingDTO, Rating>()
+                .IncludeBase<BaseDTO, BaseEntity>();
         }
     }
 }

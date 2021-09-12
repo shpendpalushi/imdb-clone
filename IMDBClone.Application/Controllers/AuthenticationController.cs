@@ -4,10 +4,12 @@ using IMDBClone.Domain.DTO.User;
 using IMDBClone.Domain.Extensions.Types;
 using IMDBClone.Domain.Service.Contracts;
 using IMDBClone.Domain.Validations;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IMDBClone.Application.Controllers
 {
+    [EnableCors("CorsApi")]
     public class AuthenticationController : BaseApiController
     {
         private readonly IUserService _userService;
@@ -28,7 +30,7 @@ namespace IMDBClone.Application.Controllers
             return Ok(result.Value);
         }
 
-        [HttpPost("api/entry")]
+        [HttpPost("api/access")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
         {
             var loginValidator = new LoginValidator();

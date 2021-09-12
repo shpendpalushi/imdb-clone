@@ -17,4 +17,8 @@
       <ProjectReference Include="..\IMDBClone.Domain\IMDBClone.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\img" />
+    </ItemGroup>
+
 </Project>

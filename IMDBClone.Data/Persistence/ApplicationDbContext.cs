@@ -20,6 +20,7 @@ namespace IMDBClone.Data.Persistence
             builder.ApplyConfiguration(new ActorConfiguration());
             builder.ApplyConfiguration(new MovieConfiguration());
             builder.ApplyConfiguration(new MovieActorConfiguration());
+            builder.ApplyConfiguration(new RatingConfiguration());
             builder.Ignore<BaseEntity>();
         }
         

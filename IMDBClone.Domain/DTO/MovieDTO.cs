@@ -13,5 +13,7 @@ namespace IMDBClone.Domain.DTO
         public string FileName { get; set; }
         public virtual ICollection<MovieActorDTO> Cast { get; set; }
         public MovieTypeEnum MovieType { get; set; }
+        public virtual ICollection<RatingDTO> Ratings{ get; set; }
+        public double AverageRating { get; set; }
     }
 }
