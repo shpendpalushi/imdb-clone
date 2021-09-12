@@ -11,6 +11,6 @@ namespace IMDBClone.Domain.Service.Contracts
         Task<List<MovieDTO>> GetTopRatedMoviesForPageAsync(int page);
         Task<List<MovieDTO>> GetMoviesBySearchTerm(string searchTerm);
         Task<MovieDTO> GetMovieByIdAsync(Guid movieId);
-        Task<Result> CreateMovieAsync(MovieDTO movie);
+        Task<Result<MovieDTO>> SaveMovieAsync(MovieDTO movie);
     }
 }

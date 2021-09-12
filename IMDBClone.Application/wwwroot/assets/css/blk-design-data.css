@@ -1,0 +1,7 @@
+.fixed-end{
+    position: fixed !important;
+    bottom: 0px !important;
+    right: 0px !important;  
+    height: 60px ;
+    margin: 20px;
+}

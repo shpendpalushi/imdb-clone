@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.GeneralTests/IMDBClone.GeneralTests.csproj": {}
+  },
+  "projects": {
+    "/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.GeneralTests/IMDBClone.GeneralTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.GeneralTests/IMDBClone.GeneralTests.csproj",
+        "projectName": "IMDBClone.GeneralTests",
+        "projectPath": "/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.GeneralTests/IMDBClone.GeneralTests.csproj",
+        "packagesPath": "/home/shpendpalushi/.nuget/packages/",
+        "outputPath": "/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.GeneralTests/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/home/shpendpalushi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "xunit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "xunit.abstractions": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "xunit.assert": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "xunit.core": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "xunit.extensibility.core": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "xunit.extensibility.execution": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}

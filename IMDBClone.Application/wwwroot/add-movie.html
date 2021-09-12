@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <title>
+    Register movie
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/assets/css/blk-design-system-pro.css?v=1.0.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/assets/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body class="checkout-page">
+  <div class="wrapper">
+    <div class="section">
+      <div class="container">
+            <div class="alert alert-primary alert-with-icon" id="success-alert" style="display: none;">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                  <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <span data-notify="icon" class="tim-icons icon-coins"></span>
+                <span>
+                  <b> Success </b> Movie was created successfully</span>
+              </div>
+            <div class="row">
+            <div class="col-lg-8">
+                <div class="container">
+                    <h3 class="title">Movie details</h3>
+                    <div class="row">
+                    <div class="col-md-12">
+                        <label class="labels">
+                        Title
+                        <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" error-message="This field is required" class="form-control required validation-nospace" name="title" placeholder="Title of the movie" aria-label="Title" id="txtTitle" required="">
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                        <label class="labels">
+                            Description
+                        </label>
+                        <textarea class="form-control" name="description" id="txtDescription" rows="4" cols="80" placeholder="You can write your text here..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="js-form-message mb-6">
+                        <label class="labels">
+                            Release date
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="date" class="form-control required validation-nospace" id="releaseDate" name="releaseDate" placeholder="MM/dd/yyyy" aria-label="MM/dd/yyyy" required="">
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-6">
+                            <label class="labels">
+                                Movie types
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" id="selectMovie" data-size="7" data-style="btn btn-primary" title="Select actors" required>
+                                <option value="1">Regular movie</option>
+                                <option value="2">TV Show</option>
+                            </select>
+                            </div>
+                        </div>
+                        </div>
+                    <br>
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-6">
+                        <label class="labels">
+                            Actors
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-control" id="selectActors" data-size="7" data-style="btn btn-primary" title="Select actors" multiple required>
+                        </select>
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-8">
+                            <h6 class="card-title">Regular Image</h6>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput" required>
+                            <div class="fileinput-new thumbnail">
+                                <img src="./assets/img/image_placeholder.jpg" alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                <span class="fileinput-new">Select image</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input type="file" name="..." id="fileInput" />
+                                </span>
+                                <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="tab-content tab-space">
+                        <br>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fas fa-angle-left mr-2"></span> Return to list</a>
+                        <button type="button" id="movie-submit" onclick="GetData(event)" class="btn btn-info btn-sm">Create movie now</button>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="/assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="/assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script src="/assets/js/plugins/bootstrap-switch.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <!--  Plugin for the Carousel, full documentation here: http://kenwheeler.github.io/slick/ -->
+  <script src="/assets/js/plugins/slick.js" type="text/javascript"></script>
+  <!--  Plugin for the blob animation -->
+  <script src="/assets/js/plugins/anime.min.js" type="text/javascript"></script>
+  <!-- Chart JS -->
+  <script src="/assets/js/plugins/chartjs.min.js"></script>
+  <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+  <script src="/assets/js/plugins/moment.min.js"></script>
+  <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <script src="/assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <script src="/assets/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <script src="/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <script src="/assets/js/plugins/jasny-bootstrap.min.js"></script>
+  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+  <script src="/assets/demo/demo.js"></script>
+  <!-- Control Center for Black UI Kit: parallax effects, scripts for the example pages etc -->
+  <script src="/assets/js/blk-design-system-pro.min.js?v=1.0.0" type="text/javascript"></script>
+</body>
+<script>
+    $(document).ready(() => {
+        if(localStorage.getItem("R") == "1"){
+            localStorage.removeItem("R");
+            $(`#success-alert`).css("display", "block");
+            setTimeout(() =>{
+                location.href = "/home.html"
+            }, 3000)
+        }
+        var token = sessionStorage.getItem(`IMDB_A_C_E_Saved`)
+        if(token == null || token == "" || token == undefined)
+            location.href="/index.html";
+        $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: "https://localhost:5001/api/actors/all",
+                headers: {
+                    "content-type": "application/json;charset=UTF-8" // Add this line
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+                },
+                success: function (result) {
+                    var ihtml = ``;
+                    var listHtml = `<li class="selected"><a role="option" class="dropdown-item selected" aria-disabled="false" tabindex="0" aria-selected="true"><span class="tim-icons icon-check-2 check-mark"></span><span class="text">Select actors</span></a></li>`
+                    for(var i=0; i<result.length; i++){
+                        ihtml += `<option value="${result[i].actorId}">${result[i].fullName}</option>`
+                        listHtml += `<li class="selected"><a role="option" class="dropdown-item selected" aria-disabled="false" tabindex="0" aria-selected="true"><span class="tim-icons icon-check-2 check-mark"></span><span class="text">${result[i].fullName}</span></a></li>`
+                    }
+                    $(`#selectActors`).find(`option`).remove()
+                    .end().append(ihtml).val("");
+                    console.log($(`ul.dropdown-menu.inner.show`))
+                    $(`ul.dropdown-menu.inner.show`).append(listHtml);
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+
+            })
+    })
+
+    function GetData(e){
+        e.preventDefault();
+        var token = sessionStorage.getItem(`IMDB_A_C_E_Saved`)
+        var  formData = new FormData();
+        var imageFile = $(`#fileInput`)[0].files[0];
+        formData.append('imageFile', imageFile);
+        formData.append('title', $(`#txtTitle`).val());
+        formData.append("releaseDate", $(`#releaseDate`).val());
+        formData.append("selectActors", $(`#selectActors`).val());
+        formData.append("description", $(`#txtDescription`).val());
+        formData.append("movieType", $(`#selectMovie`).val());
+        if(token == undefined){
+            location.href = "/index.html";
+        }
+        localStorage.setItem("R", "1")
+        $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                url: "https://localhost:5001/api/post/movie",
+                headers: {
+                    'Accept': 'application/json',
+                    contentType: 'multipart/form-data'
+                },
+                data: formData,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+                },
+                success: function (result) {
+                    console.log(`success`)
+                    $(`#success-alert`).css("display", "block");
+                    setTimeout(()=>{
+                        location.href = "/register.html";
+                    }, 3000)
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+
+            })
+            
+    }
+</script>
+</html>

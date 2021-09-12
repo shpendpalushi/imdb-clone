@@ -9,8 +9,6 @@ using IMDBClone.Data.Entities;
 using IMDBClone.Domain.Definitions;
 using IMDBClone.Domain.DTO;
 using IMDBClone.Domain.Service.Contracts;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace IMDBClone.Domain.Service.Implementations
@@ -27,7 +25,7 @@ namespace IMDBClone.Domain.Service.Implementations
         }
         public async Task<List<MovieDTO>> GetTopRatedMoviesForPageAsync(int page)
         {
-            List<Movie> movies = await _dataService.GetAllAsNoTrackingAsync(includeExpression: m => m.Include(m => m.Ratings), orderExpression: new List<Expression<Func<Movie, object>>> {
+            List<Movie> movies = await _dataService.GetAllAsNoTrackingAsync(includeExpression: m => m.Include(m => m.Ratings).Include(m=> m.Cast).ThenInclude(c => c.Actor), orderExpression: new List<Expression<Func<Movie, object>>> {
                 m => m.Ratings.Count > 0 ?  m.Ratings.Sum(r => r.Rate) / m.Ratings.Count() : 0
              }, byDescending: true, take: 10, skip: (page - 1) * 10);
             List<MovieDTO> m =  _mapper.Map<List<MovieDTO>>(movies);
@@ -51,12 +49,14 @@ namespace IMDBClone.Domain.Service.Implementations
             return _mapper.Map<MovieDTO>(await _dataService.GetAsNoTrackingAsync<Movie>(movieId));
         }
 
-        public async Task<Result> CreateMovieAsync(MovieDTO movie)
+        public async Task<Result<MovieDTO>> SaveMovieAsync(MovieDTO movie)
         {
+            DateTime date = DateTime.Now;
             Movie m = _mapper.Map<Movie>(movie);
+            m.CreatedAt = date;
+            m.ModifiedAt = DateTime.Now;
             Result result = await _dataService.AddOrUpdateAsync(m);
-            return result;
-
+            return result.Success ? Result.Ok<MovieDTO>(_mapper.Map<MovieDTO>(m)) : Result.Fail<MovieDTO>(error: result.Error);
         }
 
         #region Helpers

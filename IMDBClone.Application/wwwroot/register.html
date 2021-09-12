@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="/assets/img/favicon.png">
     <title>
-        Blk• Design System Pro by Creative Tim
+        IMDB Clone
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
@@ -183,44 +183,3 @@
 </body>
 
 </html>
-<script>
-    $(document).ready(() => {
-        var cookieObject1 = document.cookie
-        .split(";")
-        .map(cookie => cookie.split("="))
-        .reduce((accumulator, [key, value]) =>
-        ({...accumulator, [key.trim()]: decodeURIComponent(value)}),
-        {});
-        console.log(cookieObject1)
-
-        // var jsonObj = {
-        //     "email": "palushishpend3@gmail.com",
-        //         "fullName": "Shpend Palushi",
-        //         "password": "Test@1234",
-        //         "confirmPassword": "Test@1234"
-        //     }
-        // $.ajax({
-        //     type: 'POST',
-        //     dataType: 'json',
-        //     url: "https://localhost:5001/api/registration",
-        //     headers: {
-        //         "content-type": "application/json" // Add this line
-        //     },
-        //     data: JSON.stringify(jsonObj),
-        //     success: function(data){
-        //         console.log(JSON.stringify(data))
-        //     },
-        //     error: function (error){
-        //         console.log(JSON.stringify(error));
-        //     }
-        // });
-    })
-
-    var cookieObject = document.cookie
-    .split(";")
-    .map(cookie => cookie.split("="))
-    .reduce((accumulator, [key, value]) =>
-    ({...accumulator, [key.trim]: decodeURIComponent(value)}),
-    {});
-
-</script>

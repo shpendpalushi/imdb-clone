@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IMDBClone.Data.Entities;
+using IMDBClone.Domain.Definitions;
 using IMDBClone.Domain.DTO;
 
 namespace IMDBClone.Domain.Service.Contracts
@@ -10,5 +11,6 @@ namespace IMDBClone.Domain.Service.Contracts
     {
         Task<List<RatingDTO>> GetAllRatingsAsync();
         Task<List<RatingDTO>> GetAllRatingsForMovie(Guid movieId);
+        Task<Result> AddRatingAsync(RatingDTO rating);
     }
 }

@@ -11,7 +11,7 @@ namespace IMDBClone.Domain.Validations
             RuleFor(model => model.Title)
                 .MinimumLength(2)
                 .WithMessage("Title should be at least 2 characters");
-            RuleFor(model => model.Cast)
+            RuleFor(model => model.Actors)
                 .Must(cast => cast.Count>=2)
                 .WithMessage("Movie should have at least 2 actors");
             RuleFor(m => m.ReleaseDate)

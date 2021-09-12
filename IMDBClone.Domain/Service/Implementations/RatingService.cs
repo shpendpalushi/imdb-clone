@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using IMDBClone.Data.Entities;
+using IMDBClone.Domain.Definitions;
 using IMDBClone.Domain.DTO;
 using IMDBClone.Domain.Service.Contracts;
 
@@ -27,6 +28,16 @@ namespace IMDBClone.Domain.Service.Implementations
         {
             List<Rating> ratingDtos = await _dataService.GetAllAsNoTrackingAsync<Rating>(r => r.MovieId == movieId);
             return _mapper.Map<List<RatingDTO>>(ratingDtos);
+        }
+
+        public async Task<Result> AddRatingAsync(RatingDTO rating)
+        {
+            Rating r = await _dataService.FirstOrDefaultAsNoTrackingAsync<Rating>(whereExpression: r =>
+                r.UserId == rating.UserId && r.MovieId == rating.MovieId);
+            if(r != null)
+                return Result.Fail(error: "You already have rated this movie");
+            Rating rate = _mapper.Map<Rating>(rating);
+            return await _dataService.AddOrUpdateAsync(rate);
         }
     }
 }

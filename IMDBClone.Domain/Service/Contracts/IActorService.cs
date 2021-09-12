@@ -11,5 +11,7 @@ namespace IMDBClone.Domain.Service.Contracts
         Task<List<ActorDTO>> GetActorsAsync();
         Task<ActorDTO> GetActorByIdAsync(Guid id);
         Task<Result> SaveActorAsync(ActorDTO actor);
+        Task<ICollection<ActorDTO>> GetActorsFromIdListAsync(List<Guid> dataList);
+        Task<List<ActorDTO>> GetActorListFromIdListAsync(List<Guid> id);
     }
 }

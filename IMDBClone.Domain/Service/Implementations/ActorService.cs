@@ -37,5 +37,28 @@ namespace IMDBClone.Domain.Service.Implementations
             Result result = await _dataService.AddOrUpdateAsync(a);
             return result;
         }
+
+        public async Task<ICollection<ActorDTO>> GetActorsFromIdListAsync(List<Guid> dataList)
+        {
+            List<Actor> actors = new ();
+            foreach (var id in dataList)
+            {
+                actors.Add(await _dataService.GetAsync<Actor>(id));
+            }
+
+            return _mapper.Map<List<ActorDTO>>(actors);
+        }
+
+        public async Task<List<ActorDTO>> GetActorListFromIdListAsync(List<Guid> id)
+        {
+            List<Actor> actors = new();
+            foreach (var el in id)
+            {
+                Actor a = await _dataService.GetAsNoTrackingAsync<Actor>(el);
+                actors.Add(a);
+            }
+
+            return _mapper.Map<List<ActorDTO>>(actors);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace IMDBClone.Domain.DTO
 {
@@ -7,6 +8,7 @@ namespace IMDBClone.Domain.DTO
     {
         public Guid ActorId { get; set; }
         public string FullName { get; set; }
+        [JsonIgnore]
         public virtual ICollection<MovieActorDTO> Movies { get; set; }
         
     }

@@ -57,3 +57,7 @@
 /home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Application/obj/Debug/net5.0/IMDBClone.Application.genruntimeconfig.cache
 /home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Application/bin/Debug/net5.0/Humanizer.dll
 /home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Application/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Application/bin/Debug/net5.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Application/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Application/bin/Debug/net5.0/Newtonsoft.Json.dll
+/home/shpendpalushi/RiderProjects/IMDBClone/IMDBClone.Application/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll
