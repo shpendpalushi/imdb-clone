@@ -1,4 +1,4 @@
-function AddData(data){
+function AddData(data, clear){
     var ihtml = ``;
     for(var i=0; i< data.length; i++){
         ihtml += `<section class="section section-lg section-safe section-style">
@@ -55,15 +55,15 @@ function AddData(data){
                                         </div>
                                     </div>
                                     <div class="rating-container">
-                                    <input type="radio" name="rating" data-id="${data[i].movieId}" value="5" id="star-5" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 5 ? "checked": ""}> <label for="star-5">&#9733;</label>
+                                    <input type="radio" name="${data[i].movieId}" data-id="${data[i].movieId}" value="5" id="star-5" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 5 ? "checked": ""}> <label for="star-5">&#9733;</label>
                                     
-                                    <input type="radio" name="rating" data-id="${data[i].movieId}" value="4" id="star-4" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 4 ? "checked": ""}> <label for="star-4">&#9733;</label>
+                                    <input type="radio" name="${data[i].movieId}" data-id="${data[i].movieId}" value="4" id="star-4" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 4 ? "checked": ""}> <label for="star-4">&#9733;</label>
                                     
-                                    <input type="radio" name="rating" data-id="${data[i].movieId}" value="3" id="star-3" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 3 ? "checked": ""}> <label for="star-3">&#9733;</label>
+                                    <input type="radio" name="${data[i].movieId}" data-id="${data[i].movieId}" value="3" id="star-3" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 3 ? "checked": ""}> <label for="star-3">&#9733;</label>
                                     
-                                    <input type="radio" name="rating" data-id="${data[i].movieId}" value="2" id="star-2" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 2 ? "checked": ""}> <label for="star-2">&#9733;</label>
+                                    <input type="radio" name="${data[i].movieId}" data-id="${data[i].movieId}" value="2" id="star-2" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 2 ? "checked": ""}> <label for="star-2">&#9733;</label>
                                     
-                                    <input type="radio" name="rating" data-id="${data[i].movieId}" value="1" id="star-1" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 1 ? "checked": ""}> <label for="star-1">&#9733;</label>
+                                    <input type="radio" name="${data[i].movieId}" data-id="${data[i].movieId}" value="1" id="star-1" onchange="changeEvent(event);" ${parseInt(data[i].averageRating) == 1 ? "checked": ""}> <label for="star-1">&#9733;</label>
                                 </div>
                                 </div>
                             </li>
@@ -75,16 +75,21 @@ function AddData(data){
 
     </section>`
     }
-
-    $(`#body-movies`).empty().append(ihtml);
+    if(clear== "1")
+        $(`#body-movies`).empty().append(ihtml);
+    else
+    $(`#body-movies`).append(ihtml);
 }
 
 function ConvertActorsToString(actors){
     var text = "";
-    for(var i =0; i< actors.length; i++){
-        text += actors[i].fullName + ",";
+    if(actors != undefined){
+        for(var i =0; i< actors.length; i++){
+            text += actors[i].fullName + ",";
+        }
+        return text.slice(0, -1);
     }
-    return text.slice(0, -1);
+    return text;
 }
 
 
@@ -114,5 +119,66 @@ function changeEvent(event){
             },
             error: function (data) {console.log(`ERROR: ${JSON.stringify(data)}`) },
         });
-
 }
+
+$(`#search-bar-info`).on('input', event =>{
+    var searchTerm = $(event.target).val();
+    var movieType=1;
+    $(`#swap-filer`).is(`:checked`) ? 1 : 2;
+    if(searchTerm.length >1){
+        var token = sessionStorage.getItem(`IMDB_A_C_E_Saved`)
+            if(token == null || token == "" || token == undefined)
+                location.href="/index.html";
+            $.ajax({
+                url: `https://localhost:5001/api/movies-for-term?searchTerm=${searchTerm}`,
+                type: 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+                },
+                headers: {
+                    "content-type": "application/json;charset=UTF-8" // Add this line
+                },  
+                success: function (data) {
+                    AddData(data, "1")
+                },
+                error: function (data) {console.log(`ERROR: ${JSON.stringify(data)}`) },
+            });
+    }
+    else{
+
+        var token = sessionStorage.getItem(`IMDB_A_C_E_Saved`)
+        if(token == null || token == "" || token == undefined)
+            location.href="/index.html";
+        $.ajax({
+            url: `https://localhost:5001/api/movies?movieType=${movieType}`,
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            },
+            success: function (data) {
+                AddData(data, "1");
+            },
+            error: function (data) {console.log(`ERROR: ${JSON.stringify(data)}`) },
+        });
+    }
+})
+
+
+$(`#show-more-button`).click((event) => {
+    var page = parseInt($(event.target).attr("data-page"))
+    ++page;
+    var token = sessionStorage.getItem(`IMDB_A_C_E_Saved`)
+        if(token == null || token == "" || token == undefined)
+            location.href="/index.html";
+        $.ajax({
+            url: `https://localhost:5001/api/movies?page=${page}`,
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            },
+            success: function (data) {
+                AddData(data, "2");
+            },
+            error: function (data) {console.log(`ERROR: ${JSON.stringify(data)}`) },
+        });
+})

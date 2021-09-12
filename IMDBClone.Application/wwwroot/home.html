@@ -17,20 +17,27 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-desktop"></i></span>
               </div>
-              <input type="text" class="form-control" maxlength="100" placeholder="Search for movies/TV shows here">
+              <input type="text" class="form-control" maxlength="100" placeholder="Search for movies/TV shows here" id="search-bar-info">
             </div>
           </div>
     </div>
 </div>
-
 <div class="row m-2 text-center">
     <div class="col d-flex justify-content-center mt-5">
-        <span class="mr-3" style="position: relative; bottom: 5px;"><h3>Movies</h3></span><input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="M" data-off-label="T" checked/><span class="ml-3" style="position: relative; bottom: 5px;"><h3>TV Shows</h3></span>
+        <span class="mr-3" style="position: relative; bottom: 5px;"><h3>Movies</h3></span><input type="checkbox" name="checkbox" onchange="chChange(event);" class="bootstrap-switch" data-on-label="M" data-off-label="T" id="swap-filter" checked/><span class="ml-3" style="position: relative; bottom: 5px;"><h3>TV Shows</h3></span>
     </div>
 </div>
 
 <div class="wrapper mt-3" id="body-movies">
 
+</div>
+
+<div class="row text-center mt-3">
+    <div class="col justify-content-center d-flex">
+        <button class="btn btn-primary btn-round" id="show-more-button" data-page="1" type="button">
+            <i class="fas fa-plus"></i> Show more
+          </button>
+    </div>    
 </div>
 
 <a href="/add-movie.html">
@@ -80,9 +87,44 @@
                 xhr.setRequestHeader('Authorization', `Bearer ${token}`);
             },
             success: function (data) {
-                AddData(data);
+                AddData(data, "1");
             },
             error: function (data) {console.log(`ERROR: ${JSON.stringify(data)}`) },
         });
     })
+
+    function chChange(event){
+    if($(event.target).is(`:checked`)){
+        var token = sessionStorage.getItem(`IMDB_A_C_E_Saved`)
+        if(token == null || token == "" || token == undefined)
+            location.href="/index.html";
+        $.ajax({
+            url: 'https://localhost:5001/api/movies',
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            },
+            success: function (data) {
+                AddData(data, "1");
+            },
+            error: function (data) {console.log(`ERROR: ${JSON.stringify(data)}`) },
+        });
+    }
+    else{
+        var token = sessionStorage.getItem(`IMDB_A_C_E_Saved`)
+        if(token == null || token == "" || token == undefined)
+            location.href="/index.html";
+        $.ajax({
+            url: 'https://localhost:5001/api/movies?movieType=2',
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            },
+            success: function (data) {
+                AddData(data, "1");
+            },
+            error: function (data) {console.log(`ERROR: ${JSON.stringify(data)}`) },
+        });
+    }
+}
 </script>

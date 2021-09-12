@@ -26,8 +26,9 @@ namespace IMDBClone.Domain.Service.Implementations
         }
         public async Task<List<MovieDTO>> GetTopRatedMoviesForPageAsync(int page)
         {
-            List<Movie> movies = await _dataService.GetAllAsNoTrackingAsync(includeExpression: m => m.Include(m => m.Ratings).Include(m=> m.Cast).ThenInclude(c => c.Actor), orderExpression: new List<Expression<Func<Movie, object>>> {
-                m => m.Ratings.Count > 0 ?  m.Ratings.Sum(r => r.Rate) / m.Ratings.Count() : 0
+            List<Movie> movies = await _dataService.GetAllAsNoTrackingAsync(includeExpression: m => m.Include(m => m.Ratings).Include(m=> m.Cast).ThenInclude(c => c.Actor), 
+                orderExpression: new List<Expression<Func<Movie, object>>> {
+                m =>  m.Ratings.Sum(r => r.Rate) / m.Ratings.Count()
              }, byDescending: true, take: 10, skip: (page - 1) * 10);
             List<MovieDTO> m =  _mapper.Map<List<MovieDTO>>(movies);
             foreach (var el in m)
@@ -39,15 +40,22 @@ namespace IMDBClone.Domain.Service.Implementations
 
         public async Task<List<MovieDTO>> GetMoviesBySearchTerm(string searchTerm)
         {
-            List<Movie> movies = await _dataService.GetAllAsNoTrackingAsync(includeExpression: m => m.Include(mo => mo.Ratings).Include(m=> m.Cast).ThenInclude(c => c.Actor), whereExpression: m => m.Title.Contains(searchTerm) || m.Description.Contains(searchTerm) || GetByTerm(searchTerm, m), orderExpression: new List<Expression<Func<Movie, object>>> {
-                m => m.Ratings.Sum(r => r.Rate) / m.Ratings.Count()
-            }, byDescending: true);
-            List<MovieDTO> m = _mapper.Map<List<MovieDTO>>(movies);
+            List<Movie> allMovies = await _dataService.GetAllAsNoTrackingAsync<Movie>();
+            List<Movie> movies = await _dataService.GetAllAsNoTrackingAsync(
+                includeExpression: m => m.Include(mo => mo.Ratings).Include(m=> m.Cast).ThenInclude(c => c.Actor),
+                whereExpression: m => m.Title.Contains(searchTerm) || 
+                                      m.Description.Contains(searchTerm), orderExpression: new List<Expression<Func<Movie, object>>> {
+                m => m.Ratings.Sum(r => r.Rate)
+            });
+
+            List<Movie> matchingMovies = GetMoviesFOrSearchTerm(allMovies, searchTerm);
+            List<Movie> resultMovies = movies.Union(matchingMovies).ToList();
+            List<MovieDTO> m = _mapper.Map<List<MovieDTO>>(resultMovies);
             foreach (var el in m)
             {
                 el.AverageRating = el.Ratings.Count == 0 ? 0 : (double) el.Ratings.Sum(r => r.Rate) / el.Ratings.Count;
             }
-            return m;
+            return m.OrderBy(m => m.AverageRating).ToList();
         }
         
         public async Task<MovieDTO> GetMovieByIdAsync(Guid movieId)
@@ -79,67 +87,50 @@ namespace IMDBClone.Domain.Service.Implementations
         }
 
         #region Helpers
-        private bool GetByTerm(string searchTerm, Movie m)
+
+        private List<Movie> GetMoviesFOrSearchTerm(List<Movie> movies, string searchTerm)
         {
-            double starAverage = 0;
-            if (m.Ratings.Count > 0)
-            {
-                starAverage = ((double)m.Ratings.Sum(r => r.Rate) /m.Ratings.Count);
-            }
+            List<Movie> moviesToReturn = movies;
             int val;
             bool existsInt = int.TryParse(Regex.Match(searchTerm, @"^\d+").ToString(), out val);
             if (existsInt)
             {
-                if (searchTerm.Contains("stars"))
+                if (searchTerm.Contains("star"))
                 {
-                    if (searchTerm.Contains("more"))
+                    if (searchTerm.Contains("less"))
                     {
-                        if (starAverage > val)
-                            return true;
+                        moviesToReturn = moviesToReturn.Where(m =>
+                            (m.Ratings.Count > 0 && (m.Ratings.Sum(r => r.Rate) / m.Ratings.Count) < val) ||
+                            m.Ratings.Count == 0).ToList();
                     }
-                    else
+
+                    if (searchTerm.Contains("more") || searchTerm.Contains("least"))
                     {
-                        if (searchTerm.Contains("less"))
-                        {
-                            if (starAverage < val)
-                                return true;
-                        }
-                        else
-                        {
-                            if ((int) starAverage == val)
-                                return true;
-                        }
-                    }
-                }
-                else
-                {
-                    if (searchTerm.Contains("old"))
-                    {
-                        if (searchTerm.Contains("years"))
-                        {
-                            if (DateTime.Now.Year - m.ReleaseDate.Year > val)
-                                return true;
-                        }
-                    }
-                    else if (searchTerm.Contains("after"))
-                    {
-                        if (m.ReleaseDate.Year > val)
-                            return true;
-                    }
-                    else if (searchTerm.Contains("before"))
-                    {
-                        if (m.ReleaseDate.Year < val)
-                            return true;
-                    }
-                    else
-                    {
-                        if (m.ReleaseDate.Year == val)
-                            return true;
+                        moviesToReturn = moviesToReturn.Where(m =>
+                            (m.Ratings.Count > 0 && (m.Ratings.Sum(r => r.Rate) / m.Ratings.Count) > val)).ToList();
                     }
                 }
             }
+            else  if (searchTerm.Contains("after"))
+            {
+                moviesToReturn = moviesToReturn.Where(m => m.ReleaseDate.Year > val).ToList();
+            }
+            else if (searchTerm.Contains("before"))
+            {
+                moviesToReturn = moviesToReturn.Where(m => m.ReleaseDate.Year < val).ToList();
+            }
+            else if (searchTerm.Contains(("old")) && searchTerm.Contains("year"))
+            {
+                moviesToReturn = moviesToReturn.Where(m => (DateTime.Now.Year - m.ReleaseDate.Year) > val).ToList();
+            }
+            else if (searchTerm.Contains(("new")) && searchTerm.Contains("year"))
+            {
+                moviesToReturn = moviesToReturn.Where(m => (DateTime.Now.Year - m.ReleaseDate.Year) < val).ToList();
+            }
 
-            return false;
+            return moviesToReturn;
+
+
         }
         #endregion
     }
