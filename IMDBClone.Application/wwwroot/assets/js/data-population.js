@@ -90,5 +90,29 @@ function ConvertActorsToString(actors){
 
 function changeEvent(event){
     var movie = $(event.target).attr("data-id");
+    console.log(movie);
     var starRating = $(event.target).val();
+    var jObject = {
+        "Rate": starRating,
+        "MovieId": movie
+    }
+    var token = sessionStorage.getItem(`IMDB_A_C_E_Saved`)
+        if(token == null || token == "" || token == undefined)
+            location.href="/index.html";
+        $.ajax({
+            url: 'https://localhost:5001/api/rating',
+            type: 'POST',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            },
+            headers: {
+                "content-type": "application/json;charset=UTF-8" // Add this line
+            },
+            data: JSON.stringify(jObject),
+            success: function (data) {
+                console.log(`success ${data}`)
+            },
+            error: function (data) {console.log(`ERROR: ${JSON.stringify(data)}`) },
+        });
+
 }

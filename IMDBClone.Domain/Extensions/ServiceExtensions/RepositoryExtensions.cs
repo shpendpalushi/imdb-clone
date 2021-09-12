@@ -14,6 +14,7 @@ namespace IMDBClone.Domain.Extensions.ServiceExtensions
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IActorService, ActorService>();
             services.AddScoped<IMovieActorService, MovieActorService>();
+            services.AddScoped<IRatingService, RatingService>();
         }
         
     }

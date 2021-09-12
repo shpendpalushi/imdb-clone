@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using IMDBClone.Data.Entities;
@@ -64,6 +65,11 @@ namespace IMDBClone.Domain.Service.Implementations
                 await _dataService.FirstOrDefaultAsNoTrackingAsync<ApplicationUser>(
                     whereExpression: t => t.Email == email);
             return _mapper.Map<ApplicationUserDTO>(user);
+        }
+
+        public async Task<ApplicationUserDTO> GetUserByIdAsync(Guid id)
+        {
+            return _mapper.Map<ApplicationUserDTO>(await _dataService.GetAsNoTrackingAsync<ApplicationUser>(id));
         }
     }
 }

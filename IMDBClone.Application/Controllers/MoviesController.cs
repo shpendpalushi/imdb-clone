@@ -36,9 +36,10 @@ namespace IMDBClone.Application.Controllers
             _movieActorService = movieActorService;
         }
         [HttpGet("api/movies")]
-        public async Task<IActionResult> GetMovies(int page=1)
+        public async Task<IActionResult> GetMovies( int movieType = 1, int page=1)
         {
-            List<MovieDTO> movies = await _movieService.GetTopRatedMoviesForPageAsync(page);
+            MovieTypeEnum type = (MovieTypeEnum) movieType;
+            List<MovieDTO> movies = await _movieService.GetMoviesByTypeAsync(type, page);
             List<MovieDTO> dataMovies = await AddReferralData(movies);
             return Ok(dataMovies);
         }

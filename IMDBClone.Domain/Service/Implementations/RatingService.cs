@@ -11,10 +11,10 @@ namespace IMDBClone.Domain.Service.Implementations
 {
     public class RatingService : IRatingService
     {
-        private readonly DataService _dataService;
+        private readonly IDataService _dataService;
         private readonly IMapper _mapper;
 
-        public RatingService(DataService dataService, IMapper mapper)
+        public RatingService(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
             _mapper = mapper;
