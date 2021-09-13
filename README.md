@@ -29,7 +29,7 @@ IMDBClone.Application is an ASP.NET 5 (Core) Web API application. It is the plac
 ## Front End and Layers
 The front-end applciation is written in Vanilla Javascript and JQuery for 2 main reasons: 
 1. Time - Easier to build simple architectures.
-2. The system wasn't to much complex for going for a framework.
+2. The system wasn't too much complex for going for a framework.
 
 ## How it works
 First since we have implemented JWT Token for Authorizing requests, User has firstly to login in order to get Auth token. So we have the first layer of 2 components:
