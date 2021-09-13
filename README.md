@@ -31,6 +31,8 @@ The front-end applciation is written in Vanilla Javascript and JQuery for 2 main
 1. Time - Easier to build simple architectures.
 2. The system wasn't too much complex for going for a framework.
 
+**Front-end is stored under wwwroot directory of the base backend project**
+
 ## How it works
 First since we have implemented JWT Token for Authorizing requests, User has firstly to login in order to get Auth token. So we have the first layer of 2 components:
 1. Login
